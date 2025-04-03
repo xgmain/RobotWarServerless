@@ -1,5 +1,5 @@
 using Amazon.Lambda.Core;
-using RobotWarServerless.Application;
+using RobotWarServerless.Services;
 
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
 

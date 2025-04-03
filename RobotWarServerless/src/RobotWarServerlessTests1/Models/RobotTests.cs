@@ -1,7 +1,7 @@
-﻿using RobotWarServerless.Domain;
+﻿using RobotWarServerless.Models;
 using Xunit;
 
-namespace RobotWarServerless.Domain.Tests
+namespace RobotWarServerless.Models.Tests
 {
     public class RobotTests
     {

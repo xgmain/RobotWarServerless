@@ -1,6 +1,6 @@
-﻿using RobotWarServerless.Domain;
+﻿using RobotWarServerless.Models;
 
-namespace RobotWarServerless.Application
+namespace RobotWarServerless.Services
 {
     public class RobotCommandProcessor : IRobotCommandProcessor
     {

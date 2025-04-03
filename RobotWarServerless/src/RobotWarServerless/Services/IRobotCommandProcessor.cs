@@ -1,4 +1,4 @@
-﻿namespace RobotWarServerless.Application
+﻿namespace RobotWarServerless.Services
 {
     public interface IRobotCommandProcessor
     {

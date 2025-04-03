@@ -1,4 +1,4 @@
-﻿namespace RobotWarServerless.Domain
+﻿namespace RobotWarServerless.Models
 {
     public class Robot
     {

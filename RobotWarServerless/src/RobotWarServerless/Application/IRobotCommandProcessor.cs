@@ -2,6 +2,6 @@
 {
     public interface IRobotCommandProcessor
     {
-        IEnumerable<string> ProcessCommands(string input);
+        IEnumerable<string> Process(string input);
     }
 }

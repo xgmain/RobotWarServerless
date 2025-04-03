@@ -11,11 +11,11 @@ namespace RobotWars.Lambda
 
         public Function()
         {
-            // Initialize with default processor (could use DI in production)
+            // First Constructor to initialize with default processor
             _commandProcessor = new RobotCommandProcessor();
         }
 
-        // Constructor for testing with mock processor
+        // Second Constructor for testing with mock processor
         public Function(IRobotCommandProcessor commandProcessor)
         {
             _commandProcessor = commandProcessor;
@@ -25,14 +25,14 @@ namespace RobotWars.Lambda
         {
             try
             {
-                context.Logger.LogInformation($"Processing input: {input}");
-                var results = _commandProcessor.ProcessCommands(input).ToList();
+                context.Logger.LogInformation($"Processing, input is: {input}");
+                var results = _commandProcessor.Process(input).ToList();
                 context.Logger.LogInformation($"Returning results: {string.Join(", ", results)}");
                 return results;
             }
             catch (Exception ex)
             {
-                context.Logger.LogError($"Error processing commands: {ex.Message}");
+                context.Logger.LogError($"Error processing Message: {ex.Message}");
                 throw;
             }
         }

@@ -4,25 +4,23 @@ namespace RobotWarServerless.Application
 {
     public class RobotCommandProcessor : IRobotCommandProcessor
     {
-        public IEnumerable<string> ProcessCommands(string input)
+        public IEnumerable<string> Process(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
                 throw new ArgumentException("Input cannot be empty");
 
             var lines = input.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
-            if (lines.Length < 3 || lines.Length % 2 != 1)
-                throw new ArgumentException("Invalid input format");
 
-            // Parse arena dimensions (first line)
+            // Set Arena data
             var arena = ParseArena(lines[0]);
             var results = new List<string>();
 
-            // Process each robot (position + commands pairs)
+            // Process robot command with position and move
             for (int i = 1; i < lines.Length; i += 2)
             {
                 var robot = ParseRobot(lines[i], arena);
                 var commands = lines[i + 1];
-                robot.ExecuteCommands(commands);
+                robot.Execute(commands);
                 results.Add(robot.ToString());
             }
 

@@ -8,26 +8,38 @@ namespace RobotWarServerless.Domain.Tests
         private readonly Arena _arena = new Arena(5, 5);
 
         [Theory]
-        [InlineData("0 0 N", "M", "0 1 N")]
-        [InlineData("1 1 E", "M", "2 1 E")]
+        [InlineData("0 0 E", "M", "1 0 E")]
         [InlineData("1 1 S", "M", "1 0 S")]
-        [InlineData("1 1 W", "M", "0 1 W")]
-        public void MoveForward_ChangesPositionCorrectly(string startPos, string commands, string expectedPos)
+        [InlineData("1 2 W", "M", "0 2 W")]
+        [InlineData("1 3 N", "M", "1 4 N")]
+        public void MoveForward_Correctly(string startPos, string commands, string expectedPos)
         {
             var robot = CreateRobot(startPos);
-            robot.ExecuteCommands(commands);
+            robot.Execute(commands);
             Xunit.Assert.Equal(expectedPos, robot.ToString());
         }
 
         [Theory]
-        [InlineData("0 0 N", "L", "0 0 W")]
-        [InlineData("0 0 W", "L", "0 0 S")]
-        [InlineData("0 0 S", "L", "0 0 E")]
         [InlineData("0 0 E", "L", "0 0 N")]
-        public void TurnLeft_ChangesOrientationCorrectly(string startPos, string commands, string expectedPos)
+        [InlineData("0 0 S", "L", "0 0 E")]
+        [InlineData("0 0 W", "L", "0 0 S")]
+        [InlineData("0 0 N", "L", "0 0 W")]
+        public void TurnLeft_Correctly(string startPos, string commands, string expectedPos)
         {
             var robot = CreateRobot(startPos);
-            robot.ExecuteCommands(commands);
+            robot.Execute(commands);
+            Xunit.Assert.Equal(expectedPos, robot.ToString());
+        }
+
+        [Theory]
+        [InlineData("0 0 E", "R", "0 0 S")]
+        [InlineData("0 0 S", "R", "0 0 W")]
+        [InlineData("0 0 W", "R", "0 0 N")]
+        [InlineData("0 0 N", "R", "0 0 E")]
+        public void TurnRight_Correctly(string startPos, string commands, string expectedPos)
+        {
+            var robot = CreateRobot(startPos);
+            robot.Execute(commands);
             Xunit.Assert.Equal(expectedPos, robot.ToString());
         }
 

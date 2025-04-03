@@ -2,8 +2,8 @@
 {
     public class Arena
     {
-        public int Width { get; }
-        public int Height { get; }
+        private int Width { get; }
+        private int Height { get; }
 
         public Arena(int width, int height)
         {

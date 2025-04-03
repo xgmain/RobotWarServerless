@@ -2,10 +2,10 @@
 {
     public class Robot
     {
-        public int X { get; private set; }
-        public int Y { get; private set; }
-        public Orientation Orientation { get; private set; }
-        private readonly Arena arena;
+        private int X { get; set; }
+        private int Y { get; set; }
+        private Orientation Orientation { get; set; }
+        private readonly Arena _arena;
 
         public Robot(int x, int y, Orientation orientation, Arena arena)
         {
@@ -15,25 +15,20 @@
             X = x;
             Y = y;
             Orientation = orientation;
-            this.arena = arena;
+            _arena = arena;
         }
 
-        public void ExecuteCommands(string commands)
+        public void Execute(string commands)
         {
             foreach (var command in commands)
             {
-                ExecuteCommand(command);
-            }
-        }
-
-        private void ExecuteCommand(char command)
-        {
-            switch (command)
-            {
-                case 'L': TurnLeft(); break;
-                case 'R': TurnRight(); break;
-                case 'M': MoveForward(); break;
-                default: throw new ArgumentException($"Invalid command: {command}");
+                switch (command)
+                {
+                    case 'L': TurnLeft(); break;
+                    case 'R': TurnRight(); break;
+                    case 'M': MoveForward(); break;
+                    default: throw new ArgumentException($"Invalid command: {command}");
+                }
             }
         }
 
@@ -45,7 +40,6 @@
                 Orientation.W => Orientation.S,
                 Orientation.S => Orientation.E,
                 Orientation.E => Orientation.N,
-                _ => throw new InvalidOperationException("Invalid orientation")
             };
         }
 
@@ -57,7 +51,6 @@
                 Orientation.E => Orientation.S,
                 Orientation.S => Orientation.W,
                 Orientation.W => Orientation.N,
-                _ => throw new InvalidOperationException("Invalid orientation")
             };
         }
 
@@ -69,10 +62,9 @@
                 Orientation.E => (X + 1, Y),
                 Orientation.S => (X, Y - 1),
                 Orientation.W => (X - 1, Y),
-                _ => throw new InvalidOperationException("Invalid orientation")
             };
 
-            if (!arena.IsPositionValid(newX, newY))
+            if (!_arena.IsPositionValid(newX, newY))
                 throw new InvalidOperationException("Movement would take robot outside arena bounds");
 
             X = newX;
@@ -81,6 +73,4 @@
 
         public override string ToString() => $"{X} {Y} {Orientation}";
     }
-
-    public enum Orientation { N, E, S, W }
 }

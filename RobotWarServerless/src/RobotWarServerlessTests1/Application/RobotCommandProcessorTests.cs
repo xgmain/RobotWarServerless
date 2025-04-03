@@ -15,7 +15,7 @@ LMLMLMLMM
 MMRMMRMRRM";
 
             var processor = new RobotCommandProcessor();
-            var results = processor.ProcessCommands(input).ToList();
+            var results = processor.Process(input).ToList();
 
             Xunit.Assert.Equal(2, results.Count);
             Xunit.Assert.Equal("1 3 N", results[0]);
